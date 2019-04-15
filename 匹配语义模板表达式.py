@@ -92,15 +92,6 @@ def analysePattern(pattern,rootDepth,addEmpty):
                 part=analysePattern(pattern[necessary_Start:len(pattern)],depth,False)
                 result=contentMerge(result,part)
     return result
-def isMatch(set,query):
-    '''
-    :param set: string_list
-    :param query: string
-    :return: bool
-    '''
-    for i in range(len(set)):
-        if query==set[i]:return True
-    return False
 def del_square_brackets(str_input):
     str_output=str_input.replace('[','<').replace(']','|>')
     return str_output
@@ -111,7 +102,3 @@ inputs=del_square_brackets(inputs)
 all_ex=set(analysePattern(test_str,0,False))
 print(test_str)
 print(all_ex)
-
-
-
-

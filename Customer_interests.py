@@ -16,21 +16,17 @@ def find(num,search,Q):
     for i in range(Q):
         temp = search[i]
         temp1 = num[temp[0]-1:temp[1]]
-        temp2 = 0
-        for j in temp1:
-            if j == temp[2]:
-                temp2+=1
-        res[i] = temp2
+        res[i] = temp1.count(temp[2])
     return res
 
 
 if __name__=="__main__":
-    N = int(sys.stdin.readline().strip())
-    num = list(map(int,sys.stdin.readline().strip().split()))
-    Q = int(sys.stdin.readline().strip())
+    N = int(input())
+    num = list(map(int,input().split()))
+    Q = int(input().strip())
     search = []
     for i in range(Q):
-        temp = list(map(int, sys.stdin.readline().strip().split()))
+        temp = list(map(int, input().split()))
         search.append(temp)
     res = find(num,search,Q)
     for i in range(Q):

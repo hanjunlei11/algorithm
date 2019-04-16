@@ -3,6 +3,8 @@
 #思路：将给定的元组按照X的值从小到大排序，然后由于没有重复值，所以最右边的元组是符合条件的
 #然后把最后的元组pop出来，存入list，再然后在最后元组左下方的是不符合条件的，左上方的可能符合条件。
 #把左下方的去除，然后把左上方的更新到原来的list里面去，重复上述步骤，直到list为空
+
+#通过率80%，内存超限。。。。。
 import sys
 
 def sor(k):
@@ -14,16 +16,13 @@ if __name__=="__main__":
     for i in range(N):
         x,y = list(map(int,sys.stdin.readline().strip().split()))
         num[i] = [x,y]
-    num.sort(key=sor)
+    num.sort(key=sor,reverse=True)
     res = []
-    while len(num)>0:
-        temp = num.pop()
-        res.append(temp)
-        temp1 = []
-        for i in range(len(num)):
-            if num[i][1]>temp[1]:
-                temp1.append(num[i])
-        num = temp1
+    max_y = 0
+    for j in range(len(num)):
+        if num[j][1]>=max_y:
+            res.append(num[j])
+            max_y = num[j][1]
     len_x = len(res)
     for i in range(len(res)):
         len_x-=1

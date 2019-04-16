@@ -7,6 +7,7 @@
 # 接下来依次读入num_i个数字，每个数字x表示第i颗柱子上包含第x种颜色(1 <= x <= c)
 
 #一个非负整数，表示该手链上有多少种颜色不符需求。
+#算法复杂度过大，通过率60%
 
 if __name__=="__main__":
     N,M,C = map(int,input().split())
@@ -15,7 +16,7 @@ if __name__=="__main__":
         temp = list(map(int,input().split()))
         if temp[0]!=0:
             num[i]=temp[1:]
-    num = num*2
+    num = num+num[0:M]
     res = set()
     for i in range(N):
         dic = {}

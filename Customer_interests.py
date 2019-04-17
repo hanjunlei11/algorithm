@@ -9,21 +9,47 @@
 # 数据范围n <= 300000,q<=300000 k是整型
 #输出：一共q行，每行一个整数代表喜好值为k的用户的个数\
 
-#逻辑没问题，牛客网超时，应该可以用数据结构优化一下
+#牛客网完美通过测试，改为字典查询，时间复杂度大大减少
 
 import sys
 
-def find(num,search):
-    temp = num[search[0]-1:search[1]]
-    res = str(temp.count(search[2]))
-    return res
+def find_upper(num,key):
+    for i in range(len(num)-1,-1,-1):
+        if num[i]<=key:
+            return i
+    return 0
+
+def find_lower(num,key):
+    for i in range(len(num)):
+        if num[i]>=key:
+            return i
+    return 0
 
 
 if __name__=="__main__":
     N = int(input())
     num = list(map(int, input().split()))
+    dic = {}
+    for i in range(N):
+        if str(num[i]) not in dic:
+            dic[str(num[i])] = [i+1]
+        else:
+            dic[str(num[i])].append(i+1)
     Q = int(input().strip())
+    res = 0
     for i in range(Q):
+        res = 0
         temp = list(map(int, input().split()))
-        res = find(num,temp)
+        if str(temp[2]) in dic:
+            if temp[0]>dic[str(temp[2])][-1] or temp[1]<dic[str(temp[2])][0]:
+                res = 0
+            else:
+                up = find_upper(dic[str(temp[2])],temp[1])
+                low = find_lower(dic[str(temp[2])],temp[0])
+                if up < low:
+                    res = 0
+                else:
+                    res = up-low+1
+        else:
+            res = 0
         print(res)
